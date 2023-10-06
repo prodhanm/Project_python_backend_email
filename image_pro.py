@@ -1,5 +1,5 @@
 from pathlib import Path
-from PIL import Image, ImageFilter, ImageOps
+from PIL import Image, ImageFilter
 
 dir = Path(r"./image/")
 
