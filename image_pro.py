@@ -2,11 +2,13 @@ from pathlib import Path
 from PIL import Image, ImageFilter
 
 dir = Path(r"./image/")
+dir2 = Path(r"/s_image/")
+#dir2.mkdir()
 
 def image_load(dir):
     logo = Image.open(dir/"logo.png")
     logo.load()
-    for file in dir.glob("*.jpg"):
+    for index, file in enumerate(dir.glob("*.jpg"), 1):
         img = Image.open(file)
         img.load()
         cropped_img = img.crop((0,0,2500,4000))
@@ -15,6 +17,6 @@ def image_load(dir):
         logo_filter = logo_func.filter(ImageFilter.CONTOUR)
         logo_trans = logo_filter.point(lambda x: 0 if x ==255 else 255)
         cropped_img.paste(logo_trans, (0,0), logo_trans)
-        #cropped_img.show()
+        cropped_img.save(f"{dir}/{dir2}/mufassa{index}.jpg")
 
 image_load(dir)
