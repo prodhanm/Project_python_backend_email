@@ -4,6 +4,7 @@ from PIL import Image, ImageFilter
 dir = Path(r"./image/")
 dir2 = Path(r"/s_image/")
 #dir2.mkdir()
+size = (500,500)
 
 def image_load(dir):
     logo = Image.open(dir/"logo.png")
@@ -17,6 +18,8 @@ def image_load(dir):
         logo_filter = logo_func.filter(ImageFilter.CONTOUR)
         logo_trans = logo_filter.point(lambda x: 0 if x ==255 else 255)
         cropped_img.paste(logo_trans, (0,0), logo_trans)
-        cropped_img.save(f"{dir}/{dir2}/mufassa{index}.jpg")
+        cropped_img.thumbnail(size)
+        print(cropped_img.size)
+        #cropped_img.save(f"{dir}/{dir2}/mufassa{index}.jpg")
 
 image_load(dir)
